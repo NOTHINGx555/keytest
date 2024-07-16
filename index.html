@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Losowy Klucz Cyfrowy</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        #key {
+            font-size: 48px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <div id="key"></div>
+    <script>
+        function generateKey() {
+            return Math.floor(Math.random() * 1000000000); // Generates a random number up to 9 digits
+        }
+
+        function updateKey() {
+            const keyElement = document.getElementById('key');
+            keyElement.textContent = generateKey();
+        }
+
+        // Update key on page load
+        updateKey();
+
+        // Set interval to update key every 24 hours (86400000 milliseconds)
+        setInterval(updateKey, 86400000);
+    </script>
+</body>
+</html>
