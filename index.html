@@ -31,15 +31,29 @@
         }
 
         function updateKey() {
-            const keyElement = document.getElementById('key');
-            keyElement.textContent = generateKey();
+            const now = new Date().getTime();
+            const storedKeyData = JSON.parse(localStorage.getItem('keyData'));
+            
+            if (!storedKeyData || now - storedKeyData.timestamp > 86400000) { // 24 hours in milliseconds
+                const newKey = generateKey();
+                localStorage.setItem('keyData', JSON.stringify({ key: newKey, timestamp: now }));
+                return newKey;
+            }
+            
+            return storedKeyData.key;
         }
 
-        // Update key on page load
-        updateKey();
+        function displayKey() {
+            const keyElement = document.getElementById('key');
+            keyElement.textContent = updateKey();
+        }
 
-        // Set interval to update key every 24 hours (86400000 milliseconds)
-        setInterval(updateKey, 86400000);
+        displayKey();
+
+        // Close the page after 20 minutes (1200000 milliseconds)
+        setTimeout(() => {
+            window.close();
+        }, 1200000);
     </script>
 </body>
 </html>
