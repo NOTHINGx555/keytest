@@ -3,57 +3,74 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>  |  </title>
+    <title>MENU</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            margin: 0;
+            height: 100vh;
+            background-color: black;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            margin: 0;
-            background-color: #808080;
+            overflow: hidden;
+            flex-direction: column;
         }
-        #key {
-            font-size: 48px;
-            background-color: #808080;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        #playButton, #scriptButton, #downloadButton1, #downloadButton2 {
+            border: none;
+            padding: 15px 30px;
+            background-color: gray;
+            color: black;
+            cursor: pointer;
+            margin: 10px;
+            font-size: 18px;
+            transition: transform 0.3s, background-color 0.3s;
+            position: relative;
+        }
+        #playButton:hover, #scriptButton:hover, #downloadButton1:hover, #downloadButton2:hover {
+            transform: scale(1.1);
+            background-color: lightgray;
+        }
+        #playButton:active, #scriptButton:active, #downloadButton1:active, #downloadButton2:active {
+            transform: scale(0.9);
+            background-color: darkgray;
+        }
+        #image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s linear;
+            transform-origin: center center;
         }
     </style>
 </head>
 <body>
-    <div id="key"></div>
+    <button id="playButton">
+        <img id="image" src="/mnt/data/bdcff01f46a4aec8c93576314d60.jpg" alt="Discord Logo" title="Join Discord">
+    </button>
+    <button id="scriptButton">Copy script</button>
+    <button id="downloadButton1">Download 1</button>
+    <button id="downloadButton2">Download 2</button>
     <script>
-        function generateKey() {
-            return Math.floor(Math.random() * 1000000000); // Generates a random number up to 9 digits
-        }
+        document.getElementById('playButton').addEventListener('click', () => {
+            window.location.href = 'https://discord.com/invite/EMfbHd3YxV';
+        });
 
-        function updateKey() {
-            const now = new Date().getTime();
-            const storedKeyData = JSON.parse(localStorage.getItem('keyData'));
-            
-            if (!storedKeyData || now - storedKeyData.timestamp > 86400000) { // 24 hours in milliseconds
-                const newKey = generateKey();
-                localStorage.setItem('keyData', JSON.stringify({ key: newKey, timestamp: now }));
-                return newKey;
-            }
-            
-            return storedKeyData.key;
-        }
+        document.getElementById('scriptButton').addEventListener('click', () => {
+            const text = "loadstring(game:HttpGet('https://gist.githubusercontent.com/NOTHINGx555/3cb6867578b5de37ef79fd3fa9b59020/raw/1b749b59e6ab4eada4bf18e2b24aef03360a2d1f/.lua'))()";
+            navigator.clipboard.writeText(text).then(() => {
+                alert('Script copied to clipboard');
+            }).catch(err => {
+                alert('Failed to copy script', err);
+            });
+        });
 
-        function displayKey() {
-            const keyElement = document.getElementById('key');
-            keyElement.textContent = updateKey();
-        }
+        document.getElementById('downloadButton1').addEventListener('click', () => {
+            window.open('https://raw.githubusercontent.com/NOTHINGx555/x/cf0609ebeebd3658debb5e8e5bfb22de27766346/Solara.exe', '_blank');
+        });
 
-        displayKey();
-
-        // Close the page after 20 minutes (1200000 milliseconds)
-        setTimeout(() => {
-            window.close();
-        }, 1200000);
+        document.getElementById('downloadButton2').addEventListener('click', () => {
+            window.open('https://cdn.discordapp.com/attachments/1239664136208646184/1268774594467336203/Release.zip?ex=66ada5ec&is=66ac546c&hm=fb3573d87214cb75df62b383b8716282d7cff846629595d962c73fdc22d1e264&', '_blank');
+        });
     </script>
 </body>
 </html>
