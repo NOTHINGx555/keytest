@@ -41,16 +41,41 @@
             transition: transform 0.5s linear;
             transform-origin: center center;
         }
+        #discordIcon {
+            width: 64px;
+            height: 64px;
+            cursor: pointer;
+            transition: transform 0.5s linear;
+            transform-origin: center center;
+        }
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
     </style>
 </head>
 <body>
+    <a id="discordLink" href="https://discord.gg/EMfbHd3YxV" target="_blank">
+        <img id="discordIcon" src="/mnt/data/image.png" alt="Discord Icon" title="Join our Discord">
+    </a>
     <button id="playButton">
-        <img id="image" src="/mnt/data/bdcff01f46a4aec8c93576314d60.jpg" alt="Discord Logo" title="Join Discord">
+        <img id="image" src="/mnt/data/bdcff01f46a4aec8c93576314d60.jpg" alt="Join Image" title="Join">
     </button>
     <button id="scriptButton">Copy script</button>
     <button id="downloadButton1">Download 1</button>
     <button id="downloadButton2">Download 2</button>
     <script>
+        function addRotationEffect(element) {
+            element.style.animation = 'spin 0.5s linear';
+            setTimeout(() => {
+                element.style.animation = '';
+            }, 500);
+        }
+
         document.getElementById('playButton').addEventListener('click', () => {
             window.location.href = 'https://discord.com/invite/EMfbHd3YxV';
         });
@@ -70,6 +95,16 @@
 
         document.getElementById('downloadButton2').addEventListener('click', () => {
             window.open('https://cdn.discordapp.com/attachments/1239664136208646184/1268774594467336203/Release.zip?ex=66ada5ec&is=66ac546c&hm=fb3573d87214cb75df62b383b8716282d7cff846629595d962c73fdc22d1e264&', '_blank');
+        });
+
+        const discordIcon = document.getElementById('discordIcon');
+        discordIcon.addEventListener('click', () => {
+            addRotationEffect(discordIcon);
+        });
+
+        const image = document.getElementById('image');
+        image.addEventListener('click', () => {
+            addRotationEffect(image);
         });
     </script>
 </body>
