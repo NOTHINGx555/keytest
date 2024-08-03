@@ -34,9 +34,21 @@
             transform: scale(0.9);
             background-color: darkgray;
         }
-        #image, #discordIcon {
+        #playButton {
+            border: none;
+            padding: 0;
+            background: none;
+            cursor: pointer;
+            transition: transform 0.5s linear;
+            transform-origin: center center;
+        }
+        #playButton img {
             width: 100px; /* Adjust the size as needed */
             height: auto;
+        }
+        #discordIcon {
+            width: 64px;
+            height: 64px;
             cursor: pointer;
             transition: transform 0.5s linear;
             transform-origin: center center;
@@ -53,11 +65,11 @@
 </head>
 <body>
     <a id="discordLink" href="https://discord.gg/EMfbHd3YxV" target="_blank">
-        <img id="discordIcon" src="image.png" alt="Discord Icon" title="Join our Discord">
+        <img id="discordIcon" src="https://a.allegroimg.com/original/1e0b07/bdcff01f46a4aec8c93576314d60" alt="Discord Icon" title="Join our Discord">
     </a>
-    <a id="joinLink" href="https://discord.com/invite/EMfbHd3YxV" target="_blank">
-        <img id="image" src="bdcff01f46a4aec8c93576314d60.jpg" alt="Join Image" title="Join">
-    </a>
+    <button id="playButton">
+        <img id="image" src="https://tr.rbxcdn.com/3b2ad0cfbbd25880e2bb96061387f8c4/768/432/Image/Webp" alt="Join Image" title="">
+    </button>
     <button id="scriptButton">script</button>
     <button id="downloadButton1">solar</button>
     <button id="downloadButton2">Celery</button>
@@ -91,9 +103,10 @@
             addRotationEffect(discordIcon);
         });
 
-        const image = document.getElementById('image');
-        image.addEventListener('click', () => {
-            addRotationEffect(image);
+        const playButton = document.getElementById('playButton');
+        playButton.addEventListener('click', () => {
+            window.location.href = 'roblox://placeID=13874310483';
+            addRotationEffect(playButton);
         });
     </script>
 </body>
