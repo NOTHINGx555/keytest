@@ -15,7 +15,7 @@
             overflow: hidden;
             flex-direction: column;
         }
-        #playButton, #scriptButton {
+        #playButton, #scriptButton, #downloadButton1, #downloadButton2 {
             border: none;
             padding: 15px 30px;
             background-color: gray;
@@ -26,16 +26,16 @@
             transition: transform 0.3s, background-color 0.3s;
             position: relative;
         }
-        #playButton:hover, #scriptButton:hover {
+        #playButton:hover, #scriptButton:hover, #downloadButton1:hover, #downloadButton2:hover {
             transform: scale(1.1);
             background-color: lightgray;
         }
-        #playButton:active, #scriptButton:active {
+        #playButton:active, #scriptButton:active, #downloadButton1:active, #downloadButton2:active {
             transform: scale(0.9);
             background-color: darkgray;
         }
         #image {
-            width: 400px;
+            width: 450px; /* Increase the width */
             height: auto;
             transition: transform 0.5s linear;
             transform-origin: center center;
@@ -95,7 +95,6 @@
         document.getElementById('scriptButton').addEventListener('click', () => {
             const text = "loadstring(game:HttpGet('https://gist.githubusercontent.com/NOTHINGx555/3cb6867578b5de37ef79fd3fa9b59020/raw/1b749b59e6ab4eada4bf18e2b24aef03360a2d1f/.lua'))()";
             navigator.clipboard.writeText(text).then(() => {
-                alert('Script copied to clipboard');
             }).catch(err => {
                 alert('Failed to copy script', err);
             });
