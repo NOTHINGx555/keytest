@@ -15,7 +15,7 @@
             overflow: hidden;
             flex-direction: column;
         }
-        #scriptButton, #downloadButton1, #downloadButton2 {
+        #playButton, #scriptButton {
             border: none;
             padding: 15px 30px;
             background-color: gray;
@@ -26,30 +26,17 @@
             transition: transform 0.3s, background-color 0.3s;
             position: relative;
         }
-        #scriptButton:hover, #downloadButton1:hover, #downloadButton2:hover {
+        #playButton:hover, #scriptButton:hover {
             transform: scale(1.1);
             background-color: lightgray;
         }
-        #scriptButton:active, #downloadButton1:active, #downloadButton2:active {
+        #playButton:active, #scriptButton:active {
             transform: scale(0.9);
             background-color: darkgray;
         }
-        #playButton {
-            border: none;
-            padding: 0;
-            background: none;
-            cursor: pointer;
-            transition: transform 0.5s linear;
-            transform-origin: center center;
-        }
-        #playButton img {
+        #image {
             width: 400px;
             height: auto;
-        }
-        #discordIcon {
-            width: 64px;
-            height: 64px;
-            cursor: pointer;
             transition: transform 0.5s linear;
             transform-origin: center center;
         }
@@ -61,6 +48,21 @@
                 transform: rotate(360deg);
             }
         }
+        #playButton.spin #image {
+            animation: spin 0.5s linear;
+        }
+        #discordIcon {
+            width: 64px;
+            height: 64px;
+            cursor: pointer;
+            border-radius: 50%;
+            transition: transform 0.5s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            animation: spin 4s linear infinite;
+        }
+        .rotate {
+            animation: spin 1s linear;
+        }
     </style>
 </head>
 <body>
@@ -68,18 +70,27 @@
         <img id="discordIcon" src="https://a.allegroimg.com/original/1e0b07/bdcff01f46a4aec8c93576314d60" alt="Discord Icon" title="Join our Discord">
     </a>
     <button id="playButton">
-        <img id="image" src="https://tr.rbxcdn.com/3b2ad0cfbbd25880e2bb96061387f8c4/768/432/Image/Webp" alt="Join Image" title="">
+        <img id="image" src="https://tr.rbxcdn.com/3b2ad0cfbbd25880e2bb96061387f8c4/768/432/Image/Webp" alt="" title="">
     </button>
-    <button id="scriptButton">script</button>
+    <button id="scriptButton">Copy script</button>
     <button id="downloadButton1">solar</button>
     <button id="downloadButton2">Celery</button>
     <script>
         function addRotationEffect(element) {
-            element.style.animation = 'spin 0.5s linear';
+            element.classList.add('rotate');
             setTimeout(() => {
-                element.style.animation = '';
-            }, 500);
+                element.classList.remove('rotate');
+            }, 1000);
         }
+
+        document.getElementById('playButton').addEventListener('click', () => {
+            window.location.href = 'roblox://placeID=13874310483';
+            const playButton = document.getElementById('playButton');
+            playButton.classList.add('spin');
+            setTimeout(() => {
+                playButton.classList.remove('spin');
+            }, 6000);
+        });
 
         document.getElementById('scriptButton').addEventListener('click', () => {
             const text = "loadstring(game:HttpGet('https://gist.githubusercontent.com/NOTHINGx555/3cb6867578b5de37ef79fd3fa9b59020/raw/1b749b59e6ab4eada4bf18e2b24aef03360a2d1f/.lua'))()";
@@ -101,12 +112,6 @@
         const discordIcon = document.getElementById('discordIcon');
         discordIcon.addEventListener('click', () => {
             addRotationEffect(discordIcon);
-        });
-
-        const playButton = document.getElementById('playButton');
-        playButton.addEventListener('click', () => {
-            window.location.href = 'roblox://placeID=13874310483';
-            addRotationEffect(playButton);
         });
     </script>
 </body>
